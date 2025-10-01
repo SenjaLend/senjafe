@@ -1,28 +1,46 @@
-import { createConfig, http } from "wagmi";
-import { celo, moonbeam } from "wagmi/chains";
+import { cookieStorage, createConfig, createStorage, http } from "wagmi";
+import { base, moonbeam } from "./chains";
 
-export const chains = [celo, moonbeam] as const;
-export const config = createConfig({
-  chains,
-  transports: {
-    [celo.id]: http(
-      "https://celo-mainnet.g.alchemy.com/v2/_wCzLF-DIaJBtb1jRS1FD6U0cE7OA5XP",
-      {
+export const chains = [moonbeam, base];
+
+export const chainData = {
+  [moonbeam.id]: {
+    ...moonbeam,
+    logo: moonbeam.iconUrl,
+    displayName: moonbeam.name,
+    symbol: moonbeam.nativeCurrency.symbol,
+  },
+  [base.id]: {
+    ...base,
+    logo: base.iconUrl,
+    displayName: base.name,
+    symbol: base.nativeCurrency.symbol,
+  },
+};
+
+export function getConfig() {
+  return createConfig({
+    chains: [moonbeam, base],
+    ssr: true,
+    batch: {
+      multicall: true,
+    },
+    storage: createStorage({
+      storage: cookieStorage,
+    }),
+    transports: {
+      [moonbeam.id]: http(moonbeam.rpcUrls.default.http[0], {
         batch: true,
         fetchOptions: {
           keepalive: true,
         },
-      }
-    ),
-    [moonbeam.id]: http("", {
-      batch: true,
-      fetchOptions: {
-        keepalive: true,
-      },
-    }),
-  },
-  ssr: true,
-  batch: {
-    multicall: true,
-  },
-});
+      }),
+      [base.id]: http(base.rpcUrls.default.http[0], {
+        batch: true,
+        fetchOptions: {
+          keepalive: true,
+        },
+      }),
+    },
+  });
+}

@@ -1,19 +1,29 @@
 "use client";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactNode } from "react";
 import { WagmiProvider } from "wagmi";
-import { config } from "@/lib/config";
-import React from "react";
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { getConfig } from "@/lib/config";
+import FarcasterProvider from "./farcaster-provider";
+import { ChainProvider } from "@/lib/chain/chain-context";
 
 const queryClient = new QueryClient();
 
-function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({
+  children,
+  initialState,
+}: {
+  children: ReactNode;
+  initialState: unknown;
+}) {
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider initialChain={config.chains[0]}>{children}</RainbowKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+    <FarcasterProvider>
+      <WagmiProvider config={getConfig()}>
+        <QueryClientProvider client={queryClient}>
+          <ChainProvider>
+            {children}
+          </ChainProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
+    </FarcasterProvider>
   );
 }
-export default Providers;
