@@ -97,8 +97,8 @@ export async function fetchUserTransactions(
     console.log("Raw GraphQL response:", data);
     return transformGraphQLResponse(data);
   } catch (error) {
-    console.error("Failed to fetch transaction history:", error);
-    throw new Error("Failed to fetch transaction history");
+    console.error("Failed to fetch user transactions:", error);
+    return [];
   }
 }
 
@@ -115,7 +115,7 @@ export async function fetchAllTransactions(
     return transformGraphQLResponse(data);
   } catch (error) {
     console.error("Failed to fetch transaction history:", error);
-    throw new Error("Failed to fetch transaction history");
+    return [];
   }
 }
 

@@ -63,8 +63,11 @@ const HistoryClient = memo(function HistoryClient() {
 
           {!isConnected ? (
             <div className="w-full mx-auto">
-              <div className="overflow-hidden border-0 bg-gradient-to-br from-orange-50/80 via-orange-100/60 to-pink-50/70 backdrop-blur-sm ring-1 ring-white/30 hover:shadow-2xl hover:ring-orange-200/50 transition-all duration-500 rounded-xl">
-                <div className="p-8 md:p-12">
+              <div className="card-dark-mid-blue relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[var(--electric-blue)]/20 to-[var(--soft-teal)]/20 rounded-full -translate-y-10 translate-x-10"></div>
+                <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-[var(--soft-teal)]/20 to-[var(--deep-mid-blue)]/20 rounded-full translate-y-8 -translate-x-8"></div>
+                
+                <div className="p-8 md:p-12 relative z-10">
                   <div className="flex flex-col items-center justify-center">
                     <div className="mb-6">
                       <Image
@@ -74,16 +77,16 @@ const HistoryClient = memo(function HistoryClient() {
                         height={100}
                       />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                    <h3 className="text-xl font-bold text-white mb-2">
                       Wallet Not Connected
                     </h3>
-                    <p className="text-gray-600 text-center mb-6 max-w-md">
+                    <p className="text-gray-300 text-center mb-6 max-w-md">
                       Please connect your wallet to view your transaction
                       history.
                     </p>
                     <Link
                       href="/profile"
-                      className="px-6 py-3 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+                      className="px-6 py-3 bg-gradient-to-r from-[var(--electric-blue)] to-[var(--soft-teal)] hover:from-[var(--electric-blue)]/90 hover:to-[var(--soft-teal)]/90 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
                     >
                       Connect Wallet
                     </Link>
@@ -118,11 +121,14 @@ const HistoryClient = memo(function HistoryClient() {
 
           {error && (
             <div className="w-full mx-auto mt-6">
-              <div className="overflow-hidden border-0 bg-gradient-to-br from-red-50/80 via-red-100/60 to-pink-50/70 backdrop-blur-sm ring-1 ring-red-200/30 rounded-xl">
-                <div className="p-6">
+              <div className="card-dark-mid-blue relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-800/20 to-blue-600/20 rounded-full -translate-y-10 translate-x-10"></div>
+                <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-blue-600/20 to-blue-800/20 rounded-full translate-y-8 -translate-x-8"></div>
+                
+                <div className="p-6 relative z-10">
                   <div className="flex items-center gap-3">
                     <svg
-                      className="w-6 h-6 text-red-500 flex-shrink-0"
+                      className="w-6 h-6 text-blue-400 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -134,7 +140,7 @@ const HistoryClient = memo(function HistoryClient() {
                         d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
-                    <span className="text-red-700 font-medium">{error}</span>
+                    <span className="text-blue-300 font-medium">{error}</span>
                   </div>
                 </div>
               </div>
