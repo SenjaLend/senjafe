@@ -6,9 +6,7 @@ export const base = defineChain({
   nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
   rpcUrls: {
     default: {
-      http: [
-        "https://mainnet.base.org/",
-      ],
+      http: ["https://mainnet.base.org/"],
     },
   },
   blockExplorers: {
@@ -27,7 +25,11 @@ export const moonbeam = defineChain({
   name: "Moonbeam",
   nativeCurrency: { name: "GLMR", symbol: "GLMR", decimals: 18 },
   rpcUrls: {
-    default: { http: ["https://rpc.api.moonbeam.network"] },
+    default: {
+      http: [
+        "https://moonbeam-mainnet.g.alchemy.com/v2/npJ88wr-vv5oxDKlp0mQYSfVXfN2nKif",
+      ],
+    },
   },
   blockExplorers: {
     default: {
